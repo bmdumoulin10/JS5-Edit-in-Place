@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>JS5: Edit in Place</title>
+        <link rel="stylesheet" href="js5.css">
+    </head>
+    <body>
+        <div id='first'>This is the first block of text</div>
+        <div id='second'>This is the second block of text</div>
+        <div id='third'>This is the third block of text</div>
+        <div id='fourth'>This is the fourth block of text</div>
+        
+        <script>
+        // This part changes the text when you click the first div
+            document.getElementById('first').addEventListener('click', changeText)
+            
+            function changeText(){
+                document.getElementById('first').innerHTML = 'This is the new text for block 1'
+            }
+         // This part changes the text color when you click the second div   
+            document.getElementById('second').addEventListener('click', changeColor)
+            
+            function changeColor(){
+                document.getElementById('second').style.color = 'firebrick'
+            }
+         // This part changes the background color when you click the third div   
+            document.getElementById('third').addEventListener('click', changeBackground)
+            
+            function changeBackground(){
+                document.getElementById('third').style.background = 'chartreuse'
+            }
+         // This part erases the text when you click the fourth div   
+            document.getElementById('fourth').addEventListener('click', noText)
+            
+            function noText(){
+                document.getElementById('fourth').innerHTML = ' '
+            }
+            
+        </script>
+    </body>
+</html>

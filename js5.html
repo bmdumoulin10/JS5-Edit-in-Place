@@ -6,37 +6,101 @@
         <link rel="stylesheet" href="js5.css">
     </head>
     <body>
-        <div id='first'>This is the first block of text</div>
-        <div id='second'>This is the second block of text</div>
-        <div id='third'>This is the third block of text</div>
-        <div id='fourth'>This is the fourth block of text</div>
+        <h1>Edit Your Profile</h1>
+        
+        <div>
+            <h3>Name</h3>
+            <div>
+                <p class='editable'>Enter name here.</p>
+            </div>
+        </div>
+        
+        <div>
+            <h3>Age</h3>
+            <div>
+                <p class='editable'>Enter age here.</p>
+            </div>
+        </div>
+        
+        <div>
+            <h3>Favorite Food</h3>
+            <div>
+                <p class='editable'>Enter food here.</p>
+            </div>
+        </div>
+        
+        <div>
+            <h3>Favorite Book</h3>
+            <div>
+                <p class='editable'>Enter book here.</p>
+            </div>
+        </div>
         
         <script>
-        // This part changes the text when you click the first div
-            document.getElementById('first').addEventListener('click', changeText)
+     var editable = document.querySelectorAll('.editable')   
+        
+     for(var elem in editable){
+         console.log(editable[elem])
+         editable[elem].addEventListener('click', clickEditable)
+     }
+     
+     function clickEditable(e){
+         e.target.parentNode.innerHTML = '<input id="toBlur" value=' + e.target.textContent +'/>'
+         document.getElementById('toBlur').addEventListener('blur',blurEditable)
+         e.target.removeEventListener('click', clickEditable)
+     }
+     
+     function blurEditable(e){
+         e.target.removeEventListener('blur', blurEditable)
+         e.target.parentNode.innerHTML = '<p>' + e.target.value + '</p>'
+     }
+     
+     
+     
+/*          *****This will not work as the removeEventListener doesn't catch so we 
+            cannot enter text into the input area (the single instance below works)*****
+        
+            var name1 = document.querySelector('.name p')
+            var age = document.querySelector('.age p')
+            var food = document.querySelector('.food p')
+            var book = document.querySelector('.book p')
+           
+            name1.addEventListener('click', changeText(name1))
+            age.addEventListener('click', changeText(age))
+            food.addEventListener('click', changeText(food))
+            book.addEventListener('click', changeText(book))
             
             function changeText(){
-                document.getElementById('first').innerHTML = 'This is the new text for block 1'
-            }
-         // This part changes the text color when you click the second div   
-            document.getElementById('second').addEventListener('click', changeColor)
-            
-            function changeColor(){
-                document.getElementById('second').style.color = 'firebrick'
-            }
-         // This part changes the background color when you click the third div   
-            document.getElementById('third').addEventListener('click', changeBackground)
-            
-            function changeBackground(){
-                document.getElementById('third').style.background = 'chartreuse'
-            }
-         // This part erases the text when you click the fourth div   
-            document.getElementById('fourth').addEventListener('click', noText)
-            
-            function noText(){
-                document.getElementById('fourth').innerHTML = ' '
+                return function(para){
+                    para.innerHTML = '<input type="text">'
+                    para.removeEventListener('click', changeText)
+                    
+                    document.querySelector('input').addEventListener('blur', finalText)
+                }
             }
             
+           function finalText(para){
+                 para.innerHTML = '<p>' + document.querySelector('input').value +'</p>'
+            }
+           
+            *****This single formula works to get the job done but I cannot figure out
+            how to get it to go across all portions of the page*****
+      
+            name1.addEventListener('click', changeText)
+            
+            function changeText(){
+                name1.innerHTML = '<input type="text">'
+                
+                name1.removeEventListener('click', changeText)
+
+                document.querySelector('input').addEventListener('blur', finalText)
+            }
+            
+           function finalText(){
+                 name1.innerHTML = '<p>' + document.querySelector('input').value +'</p>'
+                
+            }
+*/            
         </script>
     </body>
 </html>
